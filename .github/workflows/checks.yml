@@ -1,0 +1,15 @@
+name: Public checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test activity and weather logic
+        run: node --test tests/*.test.mjs
+      - name: Audit public files
+        run: node scripts/audit-public.mjs
+      - name: Test local server
+        run: python3 -m unittest discover -s tests -p 'test_*.py'

@@ -1,0 +1,22 @@
+# Never publish local profiles, generated pages, credentials, or printer data.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.log
+.DS_Store
+node_modules/
+coverage/
+output/
+artifacts/
+private/
+*.pdf
+*.png
+*.zip
+*.local.*
+
+__pycache__/
+*.pyc

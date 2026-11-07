@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://geocoding-api.open-meteo.com https://api.open-meteo.com; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'">
+  <title>Placemat Explorers</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <header class="site-header no-print">
+    <a class="brand" href="./" aria-label="Placemat Explorers home"><span aria-hidden="true">✳</span> Placemat Explorers</a>
+    <span class="header-note">A little wonder at the table.</span>
+  </header>
+  <main>
+    <section class="intro no-print">
+      <p class="eyebrow">MAKE ROOM FOR DISCOVERY</p>
+      <h1>Small moments.<br><em>Big imaginations.</em></h1>
+      <p>A printable page of puzzles, stories and weather wonders. Choose the challenge, make it yours, and explore together.</p>
+      <div class="privacy-note"><span aria-hidden="true">◇</span> No accounts. No child's name. No saved profiles.</div>
+    </section>
+    <div class="workspace">
+      <aside class="controls no-print" aria-label="Customize your placemat">
+        <form id="settings">
+          <h2>Your next little adventure</h2>
+          <label for="age">Child's age <span class="subtle">kept on this device</span></label>
+          <select id="age" name="age" required><option value="">Choose an age</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select>
+          <p class="field-help">A starting point, not a test. Choose a different level whenever it suits your child.</p>
+          <div class="form-row"><div><label for="date">Day</label><input id="date" name="date" type="date" required></div><div><label for="edition">Edition</label><select id="edition" name="edition"><option value="morning">Morning</option><option value="afternoon">Afternoon</option></select></div></div>
+          <div class="form-row"><div><label for="letter">Letter to explore</label><select id="letter" name="letter"></select></div><div><label for="units">Temperature</label><select id="units" name="units"><option value="C">Celsius (°C)</option><option value="F">Fahrenheit (°F)</option></select></div></div>
+          <button class="primary" type="submit">Make my placemat <span aria-hidden="true">↗</span></button>
+        </form>
+        <section class="weather-controls" aria-labelledby="weather-heading">
+          <h2 id="weather-heading">A window to the weather</h2>
+          <p class="field-help">Optional. Without a forecast, the page invites your child to look outside and make observations.</p>
+          <label for="city">City or town</label><input id="city" type="search" maxlength="100" placeholder="e.g. London" autocomplete="off" spellcheck="false">
+          <p class="field-help">Use a city, not your address. Search sends this city and your IP address to Open-Meteo. Fetching a forecast sends the selected city's coordinates. Your child's age is never sent.</p>
+          <button id="search" class="secondary" type="button">Search cities</button>
+          <div id="city-picker" hidden><label for="place">Choose the right place</label><select id="place"></select><button id="forecast" class="secondary" type="button">Add local forecast</button></div>
+          <button id="clear-weather" class="text-button" type="button" hidden>Remove forecast and city</button>
+          <p id="weather-status" class="status" role="status" aria-live="polite"></p>
+        </section>
+        <details class="about"><summary>Privacy, printing &amp; weather</summary><p>All activities are generated locally, using a small library of age-banded prompts. There is no AI service, analytics, tracking, location permission or automatic printing.</p><p>No settings are saved by this app. Your browser may retain form entries, print files, or history. Printed and saved pages can include the city you choose, but never the age.</p><p>Weather is a forecast, not a safety alert. Check local official warnings with a grown-up. Weather service access needs an internet connection.</p><p><a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather by Open-Meteo</a>. Data under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>; geocoding uses <a href="https://www.geonames.org/" target="_blank" rel="noopener noreferrer">GeoNames</a>. See the README before hosting commercially.</p></details>
+      </aside>
+      <section class="preview-area" aria-label="Placemat preview">
+        <div class="preview-toolbar no-print"><span id="preview-caption">YOUR PRINTABLE ADVENTURE</span><button id="print" class="secondary compact" type="button" disabled>Print / save PDF</button></div>
+        <p id="app-status" class="status no-print" role="status" aria-live="polite">Choose an age to create your first placemat.</p>
+        <div id="empty" class="empty no-print"><div class="empty-art" aria-hidden="true">☁<span>✳</span>☁</div><h2>Wonder starts here.</h2><p>Your very own table-sized adventure is one click away.</p><p class="subtle">Landscape · one page · happy with crayons</p></div>
+        <article id="placemat" class="placemat" hidden aria-label="Printable activity placemat"></article>
+        <details id="answers" class="answers no-print" hidden><summary>Grown-up notes &amp; answers</summary><div id="answer-content"></div></details>
+      </section>
+    </div>
+  </main>
+  <footer class="site-footer no-print">Made for curiosity, not performance. Follow your child's lead.</footer>
+</body>
+</html>
