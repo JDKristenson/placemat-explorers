@@ -3,7 +3,7 @@ import {readdir,readFile,lstat} from 'node:fs/promises';
 import {resolve,relative,join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
-const allowed=new Set(['.gitignore','README.md','LICENSE','CONTRIBUTING.md','SECURITY.md','index.html','styles.css','app.mjs','core.mjs','serve.py','package.json','tests/core.test.mjs','tests/test_server.py','scripts/audit-public.mjs','.github/workflows/checks.yml']);
+const allowed=new Set(['.gitignore','README.md','LICENSE','CONTRIBUTING.md','SECURITY.md','index.html','styles.css','app.mjs','core.mjs','serve.py','package.json','tests/core.test.mjs','tests/test_server.py','scripts/audit-public.mjs','.github/workflows/checks.yml','docs/architecture.md','docs/architecture.excalidraw']);
 const ignored=new Set(['.git','node_modules','__pycache__']);
 const findings=[];let count=0;
 const patterns=[['private key',/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/],['cloud credential',/(?:AKIA|ASIA)[A-Z0-9]{16}/],['service token',/(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{30,}|sk-(?:proj-)?[A-Za-z0-9_-]{20,})/],['absolute personal path',/\/(?:Users|home)\/[A-Za-z0-9._-]+\//],['email address',/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i]];
