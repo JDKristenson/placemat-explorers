@@ -49,7 +49,9 @@ The Open-Meteo free API is for non-commercial use and has usage limits. Review i
 
 ## Development and checks
 
-Node.js 20 or newer is needed only to run the tests. There are no npm dependencies and no build step.
+Node.js 20 or newer is needed only to run the JavaScript tests and public-content audit. Python 3 runs the local server and its tests using only the standard library. There are no npm dependencies, no install command, no environment variables or API keys to configure, and no build step: the browser loads the source modules directly. `package.json` is marked private to prevent accidental npm publication; it does not describe the repository's visibility.
+
+Run these commands from a clean checkout (the same checks run in [GitHub Actions](.github/workflows/checks.yml)):
 
 ```sh
 npm test
@@ -65,6 +67,12 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 - `scripts/audit-public.mjs`: conservative release file allowlist and unsafe-content checks. This supplements human review, not a guarantee that arbitrary future edits contain no secrets.
 
 Activity generation uses a seeded perfect maze (connected tree), so every cell is reachable and each pair of cells has exactly one path. The grown-up answer panel includes its solution.
+
+The public-content audit checks every local file, not just tracked files. Unexpected editor files, downloads or local notes will fail the allowlist; keep them outside the checkout rather than broadening the allowlist. Python test caches are already excluded. Automated tests do not replace the browser and print-preview checks in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## How it fits together
+
+Read the [architecture and privacy-boundary guide](docs/architecture.md), with a linked [editable Excalidraw drawing](docs/architecture.excalidraw). It follows the actual source: a loopback static server, browser-only activity generation and rendering, explicit optional weather requests, and manual browser printing. There is no application backend or stored child profile.
 
 ## Contributing safely
 
